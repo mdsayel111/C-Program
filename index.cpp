@@ -30,19 +30,24 @@ public:
             {
                 int num = stoi(currentNum.length() > 0 ? currentNum : "0");
                 current += sign * num;
-                sign = sign * -1;
+                sign = -1;
                 currentNum = "";
             }
             else if (currentChar == '+')
             {
                 int num = stoi(currentNum.length() > 0 ? currentNum : "0");
                 current += sign * num;
+                // cout << current << " current" << endl;
                 sign = 1;
                 currentNum = "";
             }
             else if (currentChar == '(')
             {
-                countStack.push(sign * current);
+                // int num = stoi(currentNum.length() > 0 ? currentNum : "0");
+                // current += sign * num;
+                countStack.push(current);
+                // cout << current << " current" << endl;
+
                 current = 0;
             }
             else if (currentChar == ')')
@@ -59,6 +64,7 @@ public:
 
             i++;
         }
+        current += sign * stoi(currentNum.length() > 0 ? currentNum : "0");
         cout << current << " current" << endl;
         return 0;
     }
@@ -68,7 +74,7 @@ int main()
     Solution obj;
     vector<int> nums = {73, 74, 75, 71, 69, 72, 76, 73};
     // string s = "()";
-    int result = obj.calculate("1 + 1");
+    int result = obj.calculate("1-(1+2)");
     cout << result << endl;
     return 0;
 }
