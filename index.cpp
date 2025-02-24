@@ -29,33 +29,39 @@ public:
             if (currentChar == '-')
             {
                 int num = stoi(currentNum.length() > 0 ? currentNum : "0");
-                current += sign * num;
+                // cout << num << " currentttt" << endl;
+                countStack.push(sign * num);
                 sign = -1;
                 currentNum = "";
             }
             else if (currentChar == '+')
             {
                 int num = stoi(currentNum.length() > 0 ? currentNum : "0");
-                current += sign * num;
+                countStack.push(sign * num);
                 // cout << current << " current" << endl;
                 sign = 1;
                 currentNum = "";
             }
             else if (currentChar == '(')
             {
-                // int num = stoi(currentNum.length() > 0 ? currentNum : "0");
+                int num = stoi(currentNum.length() > 0 ? currentNum : "1");
+                // cout << sign << " sign" << num << " num" << endl;
+                // cout << num << " num" << endl;
                 // current += sign * num;
-                countStack.push(current);
-                // cout << current << " current" << endl;
-
-                current = 0;
+                countStack.push(sign * num);
+                // cout << current << " sign * num" << endl;
+                sign = 1;
+                currentNum = "";
+                // current = 0;
             }
             else if (currentChar == ')')
             {
                 int top = countStack.top();
                 countStack.pop();
-                int total = top + (current * sign);
-                current = total;
+                int num = stoi(currentNum.length() > 0 ? currentNum : "1");
+                // int total = top * (current);
+                // cout << num << " top * current" << endl;
+                current = top * current;
             }
             else
             {
@@ -65,7 +71,7 @@ public:
             i++;
         }
         current += sign * stoi(currentNum.length() > 0 ? currentNum : "0");
-        cout << current << " current" << endl;
+        // cout << current << " current" << endl;
         return 0;
     }
 };
@@ -74,7 +80,7 @@ int main()
     Solution obj;
     vector<int> nums = {73, 74, 75, 71, 69, 72, 76, 73};
     // string s = "()";
-    int result = obj.calculate("1-(1+2)");
+    int result = obj.calculate("1-2(2)");
     cout << result << endl;
     return 0;
 }
